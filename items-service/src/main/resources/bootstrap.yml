@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: items-service
+  cloud:
+    config:
+      uri: http://localhost:5000
+  profiles:
+    active: default
+
+# spring.profile.active would default bydefault, can be set to dev or qa as per ENV
+    
+server:
+  port: 2001
+  
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
