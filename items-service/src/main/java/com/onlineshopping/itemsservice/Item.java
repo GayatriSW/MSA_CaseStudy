@@ -13,6 +13,7 @@ public class Item {
 	private String item_name;
 	private String item_desc;
 	private Integer price;
+	private int port;
 	
 	public Item() {
 	}
@@ -55,5 +56,13 @@ public class Item {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 }

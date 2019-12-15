@@ -50,6 +50,7 @@ public class ItemController {
 			itemCopy = new Item(item.getId(), item.getItem_name(), item.getItem_desc(), item.getPrice());
 		
 		System.out.println("Port used : "+envmt.getProperty("local.server.port"));
+		itemCopy.setPort(Integer.parseInt(envmt.getProperty("local.server.port")));
 		return itemCopy;
 	}
 	

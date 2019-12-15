@@ -8,12 +8,14 @@ public class ItemResponseModel {
 	private String item_name;
 	private String item_desc;
 	private Integer price;
+	private Integer port;
 	
-	public ItemResponseModel(Long id, String itemName, String itemDesc, Integer price) {
+	public ItemResponseModel(Long id, String itemName, String itemDesc, Integer price, Integer port) {
 		this.id = id;
 		this.item_name = itemName;
 		this.item_desc = itemDesc;
 		this.price = price;
+		this.port = port;
 	}
 	
 	public Long getId() {
@@ -40,10 +42,17 @@ public class ItemResponseModel {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	public Integer getPort() {
+		return port;
+	}
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+
 	@Override
 	public String toString() {
 		return "ItemResponseModel [id=" + id + ", item_name=" + item_name + ", item_desc=" + item_desc + ", price="
-				+ price + "]";
+				+ price + ", port hit="+ port +"]";
 	}
 	
 }
