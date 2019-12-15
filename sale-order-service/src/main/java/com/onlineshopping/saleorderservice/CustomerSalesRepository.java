@@ -1,0 +1,9 @@
+package com.onlineshopping.saleorderservice;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CustomerSalesRepository extends JpaRepository<CustomerSalesOrder, Long> {
+
+}

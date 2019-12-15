@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: C:\Users\student\GIT 
+
+    
+server:
+  port: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+        
+        
