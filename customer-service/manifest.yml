@@ -1,8 +1,9 @@
 applications:
-- name: customer-service
+- name: 206428-customer-service
 path: target/customer-service-0.0.1-SNAPSHOT.jar
 domain: cfapps.io
 memory: 1GB
 instances: 1
 services:
-- Eureka_server_206428
+- 206428_EurekaNamingServer
+- 206428_SpringCloudConfigServer
