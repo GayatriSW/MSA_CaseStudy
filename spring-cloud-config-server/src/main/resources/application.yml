@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: C:\Users\student\GIT 
+          uri: C:\Users\student\git_2\Config-Repository 
 
     
 server:

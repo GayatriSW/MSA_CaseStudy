@@ -111,5 +111,18 @@ public class salesOrderController {
 		}
 		return retOrder;
 	}
+	
+	@GetMapping("/CustomersFromSales")
+	public List<CustomerSalesOrder> getCustomerDetails() {
+		List<CustomerSalesOrder> custInfo =  custRepo.findAll();
+		List<CustomerSalesOrder> retCustInfo = new ArrayList<>();
+		for(CustomerSalesOrder c1 : custInfo) {
+			CustomerSalesOrder cust = new CustomerSalesOrder(c1.getId(), c1.getFirst_name(),
+					c1.getLast_name(), c1.getEmail());
+			retCustInfo.add(cust);
+		}
+		System.out.println("returning customer info list of size : "+retCustInfo.size());
+		return retCustInfo;
+	}
 
 }
