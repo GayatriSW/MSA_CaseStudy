@@ -3,6 +3,8 @@ package com.onlineshopping.customerservice;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 public class CustomerController {
+	
+	private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
 	@Autowired
 	CustomerRepository custRepo;
@@ -36,6 +38,7 @@ public class CustomerController {
 	
 	@GetMapping("/Customers")
 	public List<Customer> getAllCustomers() {
+		log.info("invoking /Customers service from customer-service");
 		List<Customer> customerList = custRepo.findAll();
 		List<Customer> returnCustList = new ArrayList<>();
 		for(Customer c1 : customerList) {
@@ -52,7 +55,7 @@ public class CustomerController {
 		
 	    String message = "customer created#"+addedCust.getId().toString()+"#"+addedCust.getFirst_name()
 	    		+"#"+addedCust.getLast_name()+"#"+addedCust.getEmail();
-	    System.out.println("publishing event to exchange :"+custConfig.getExchange()
+	    log.info("publishing event to exchange :"+custConfig.getExchange()
 	    		+" binds to queue : "+custConfig.getQueueName()
 	    		+" with rounting key : "+custConfig.getRoutingkey());
 	    amqpTemplate.convertAndSend(custConfig.getExchange(), custConfig.getRoutingkey(), message);

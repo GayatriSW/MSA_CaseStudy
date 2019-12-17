@@ -2,7 +2,8 @@ package com.onlineshopping.itemsservice;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.core.env.Environment;
@@ -15,6 +16,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @EnableHystrix
 public class ItemController {
 	
+	private static final Logger log = LoggerFactory.getLogger(ItemController.class);
+	
 	@Autowired
 	ItemsRepository itemRepo;
 	
@@ -26,13 +29,13 @@ public class ItemController {
 
 	@GetMapping("/Items")
 	public List<Item> getItems(){
+		log.info("Service /Items is invoked from Items-service...!!!");
 		List<Item> returnItemsList = new ArrayList<>();
 		
 		List<Item> itemsList = itemRepo.findAll();
 		for(Item i1 : itemsList) {
 			returnItemsList.add(new Item(i1.getId(), i1.getItem_name(), i1.getItem_desc(), i1.getPrice()));
 		}
-		
 		return returnItemsList;
 	}
 	
@@ -51,11 +54,12 @@ public class ItemController {
 		
 		System.out.println("Port used : "+envmt.getProperty("local.server.port"));
 		itemCopy.setPort(Integer.parseInt(envmt.getProperty("local.server.port")));
+		log.info("Post used - Items-service : "+itemCopy.getPort());
 		return itemCopy;
 	}
 	
 	public Item fallBackItemDetails(String mssg) {
-		System.out.println("fallback method invoked in item-service");
+		log.info("fallback method invoked in item-service");
 		//return new Item(0l, "UnknownItem", "UnknowItem", 0);
 		return new Item(0l, itemsConfiguration.getDefaultItemName(), itemsConfiguration.getDefaultItemDesc(), 0);
 	}
